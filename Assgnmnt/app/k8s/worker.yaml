@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: default
+  labels:
+    app: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+        - name: worker
+          image: <accountID>.dkr.ecr.us-east-1.amazonaws.com/app_assignment-app:latest
+          command: ["python", "checker.py"]
+          env:
+            - name: DB_HOST
+              value: "app-assignment-db.xxx.us-east-1.rds.amazonaws.com"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "pulsecheck"
+            - name: DB_USER
+              value: "lpxchahal"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pulsecheck-db-secret
+                  key: password
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi

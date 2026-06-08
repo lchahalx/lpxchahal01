@@ -1,0 +1,6 @@
+clusterName: app_assignment-cluster
+region: us-east-1
+vpcId: <vpc-id>
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/app_assignment-alb-controller

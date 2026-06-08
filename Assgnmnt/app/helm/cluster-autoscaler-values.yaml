@@ -1,0 +1,8 @@
+autoDiscovery:
+  clusterName: app_assignment-cluster
+awsRegion: us-east-1
+rbac:
+  serviceAccount:
+    name: cluster-autoscaler
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/app_assignment-cluster-autoscaler

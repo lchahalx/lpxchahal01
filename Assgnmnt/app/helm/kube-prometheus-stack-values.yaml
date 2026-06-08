@@ -1,0 +1,9 @@
+grafana:
+  persistence:
+    enabled: false
+prometheus:
+  prometheusSpec:
+    retention: 24h
+alertmanager:
+  persistence:
+    enabled: false
